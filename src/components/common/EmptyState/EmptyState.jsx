@@ -1,11 +1,12 @@
 
-import { VStack, Text, Icon } from '@chakra-ui/react';
-import { FiInbox } from 'react-icons/fi'; // react-icons install 
+import React from 'react';
 
-const EmptyState = ({ message = "No Data Found" }) => (
-    <VStack py={10} spacing={3}>
-        <Icon as={FiInbox} w={12} h={12} color="gray.400" />
-        <Text color="gray.500">{message}</Text>
-    </VStack>
-);
-export default EmptyState;
+export default function EmptyState({ title = "No Data Found", description, action }) {
+    return (
+        <div className="flex flex-col items-center justify-center p-8 text-center border-2 border-dashed border-gray-200 rounded-xl">
+            <h3 className="text-lg font-semibold text-gray-700">{title}</h3>
+            {description && <p className="text-sm text-gray-500 mt-1 mb-4">{description}</p>}
+            {action && <div className="mt-2">{action}</div>}
+        </div>
+    );
+}

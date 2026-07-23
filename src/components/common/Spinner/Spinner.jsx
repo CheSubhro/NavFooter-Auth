@@ -1,23 +1,9 @@
 
 import React from 'react';
-import { Spinner as ChakraSpinner, Center, Text, VStack } from '@chakra-ui/react';
+import { Spinner as HeroSpinner } from "@heroui/react";
 
-const Spinner = ({ label = "Loading...", ...props }) => {
+export default function Spinner(props) {
     return (
-        <Center py={10} w="100%">
-        <VStack>
-            <ChakraSpinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-            {...props}
-            />
-            {label && <Text color="gray.500" fontSize="sm">{label}</Text>}
-        </VStack>
-        </Center>
+        <HeroSpinner {...props} />
     );
-};
-
-export default Spinner;
+}

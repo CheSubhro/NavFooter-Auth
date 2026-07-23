@@ -1,57 +1,19 @@
 
 import React from 'react';
-import { Dialog } from '@chakra-ui/react';
+import { Modal as HeroModal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/react";
 
-const Modal = ({ 
-    isOpen, 
-    onClose, 
-    title, 
-    children, 
-    footer, 
-    size = 'md', 
-    ...props 
-}) => {
+export default function Modal({ isOpen, onOpenChange, title, children, footer }) {
     return (
-        <Dialog.Root 
-            open={isOpen} 
-            onOpenChange={(e) => !e.open && onClose?.()} 
-            size={size} 
-            motionPreset="slide-in-bottom"
-            {...props}
-        >
-            <Dialog.Backdrop />
-            
-            <Dialog.Positioner>
-                <Dialog.Content borderRadius="xl" boxShadow="2xl" p="2">
-                    
-                    {/* Header and Title Section */}
-                    {title && (
-                        <Dialog.Header>
-                            <Dialog.Title fontWeight="bold" fontSize="lg" color="slate.800">
-                                {title}
-                            </Dialog.Title>
-                        </Dialog.Header>
-                    )}
-                    
-                    {/* 🆕 Dialog.CloseTrigger replaces ModalCloseButton */}
-                    <Dialog.CloseTrigger position="absolute" top="4" right="4" cursor="pointer" />
-                    
-                    {/* 🆕 Dialog.Body replaces ModalBody */}
-                    <Dialog.Body pb="6" pt="2">
-                        {children}
-                    </Dialog.Body>
-                    
-                    {/* 🆕 Dialog.Footer replaces ModalFooter */}
-                    {footer && (
-                        <Dialog.Footer borderTop="1px solid" borderColor="gray.100" pt="4">
-                            {footer}
-                        </Dialog.Footer>
-                    )}
-                    
-                </Dialog.Content>
-            </Dialog.Positioner>
-        </Dialog.Root>
+        <HeroModal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <ModalContent>
+                {(close) => (
+                    <>
+                        {title && <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>}
+                        <ModalBody>{children}</ModalBody>
+                        {footer && <ModalFooter>{footer}</ModalFooter>}
+                    </>
+                )}
+            </ModalContent>
+        </HeroModal>
     );
-};
-
-export default Modal;
+}

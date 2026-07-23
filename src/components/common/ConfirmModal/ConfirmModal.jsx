@@ -1,78 +1,28 @@
 
 import React from 'react';
-import { Dialog, Button, HStack, Text } from '@chakra-ui/react';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@heroui/react";
 
-const ConfirmModal = ({
-    isOpen,
-    onClose,
-    onConfirm,
-    title = "Are you sure?",
-    children,
-    confirmText = "Confirm",
-    cancelText = "Cancel",
-    loading = false,
-    ...props
-}) => {
+export default function ConfirmModal({ isOpen, onOpenChange, onConfirm, title = "Are you sure?", message = "This action cannot be undone.", confirmText = "Confirm", cancelText = "Cancel" }) {
     return (
-        <Dialog.Root 
-            open={isOpen} 
-            onOpenChange={(e) => !e.open && onClose?.()}
-            closeOnInteractOutside={false}
-            size="sm"
-            {...props}
-        >
-            <Dialog.Backdrop />
-            
-            <Dialog.Positioner>
-                <Dialog.Content borderRadius="xl" p="4" bg="white" boxShadow="2xl">
-                    
-                    {/* Modal Header & Title */}
-                    <Dialog.Header>
-                        <Dialog.Title fontWeight="bold" fontSize="lg" color="red.600">
-                            ⚠️ {title}
-                        </Dialog.Title>
-                    </Dialog.Header>
-
-                    {/* Modal Body Content */}
-                    <Dialog.Body py="3">
-                        <Text color="gray.600" fontSize="sm">
-                            {children || "Do you really want to perform this action? This process cannot be undone."}
-                        </Text>
-                    </Dialog.Body>
-
-                    {/* Modal Footer Action Buttons */}
-                    <Dialog.Footer mt="4">
-                        <HStack spaceX="3" justify="flex-end" w="100%">
-                            {/* Cancel Button */}
-                            <Button 
-                                variant="outline" 
-                                size="sm" 
-                                onClick={onClose}
-                                disabled={loading}
-                                cursor="pointer"
-                            >
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <ModalContent>
+                {(close) => (
+                    <>
+                        <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+                        <ModalBody>
+                            <p>{message}</p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button variant="light" onPress={close}>
                                 {cancelText}
                             </Button>
-                            
-                            {/* Confirm Button */}
-                            <Button 
-                                bg="red.600" 
-                                color="white" 
-                                size="sm" 
-                                onClick={onConfirm}
-                                loading={loading}
-                                _hover={{ bg: "red.700" }}
-                                cursor="pointer"
-                            >
+                            <Button color="danger" onPress={() => { onConfirm(); close(); }}>
                                 {confirmText}
                             </Button>
-                        </HStack>
-                    </Dialog.Footer>
-
-                </Dialog.Content>
-            </Dialog.Positioner>
-        </Dialog.Root>
+                        </ModalFooter>
+                    </>
+                )}
+            </ModalContent>
+        </Modal>
     );
-};
-
-export default ConfirmModal;
+}

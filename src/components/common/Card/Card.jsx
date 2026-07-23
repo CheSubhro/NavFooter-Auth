@@ -1,17 +1,13 @@
 
+import React from 'react';
+import { Card as HeroCard, CardBody, CardHeader, CardFooter } from "@heroui/react";
 
-import { Box } from '@chakra-ui/react';
-
-const Card = ({ children, ...props }) => (
-    <Box 
-        p={5} 
-        shadow="md" 
-        borderWidth="1px" 
-        borderRadius="lg" 
-        bg="white" 
-        {...props}
-    >
-        {children}
-    </Box>
-);
-export default Card;
+export default function Card({ header, body, footer, ...props }) {
+    return (
+        <HeroCard {...props}>
+            {header && <CardHeader>{header}</CardHeader>}
+            <CardBody>{body}</CardBody>
+            {footer && <CardFooter>{footer}</CardFooter>}
+        </HeroCard>
+    );
+}

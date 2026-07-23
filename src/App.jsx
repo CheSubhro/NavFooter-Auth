@@ -1,10 +1,12 @@
 
-import { Button } from "@heroui/react";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
 
 export default function App() {
     return (
-        <div className="flex justify-center items-center h-screen">
-            <Button color="primary">HeroUI Working!</Button>
-        </div>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
     );
 }
