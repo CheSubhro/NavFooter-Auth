@@ -1,17 +1,17 @@
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/Home'
 
 export default function AppRoutes() {
     return (
         <Routes>
-            {/* Main / Home Route */}
-            <Route path="/" element={<Home />} />
-            
-            {/* Future routes gulo ekhane add hobe */}
-            {/* <Route path="/login" element={<Login />} /> */}
-            {/* <Route path="/profile" element={<Profile />} /> */}
+            <Route element={<MainLayout />}>
+                <Route path="/" element={<Home />} />
+                {/* <Route path="/about" element={<About />} /> */}
+                {/* <Route path="/login" element={<Login />} /> */}
+            </Route>
         </Routes>
     );
 }

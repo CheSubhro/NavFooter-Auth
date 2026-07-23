@@ -1,126 +1,98 @@
 
-// src/components/layout/Navbar/Navbar.jsx
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Box, Flex, Button, HStack, Link, Stack } from '@chakra-ui/react';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { Link, useNavigate } from 'react-router-dom';
+import { 
+    Button, 
+    Dropdown, 
+    DropdownTrigger, 
+    DropdownMenu, 
+    DropdownItem, 
+    Avatar 
+} from "@heroui/react";
 
-const Navbar = () => {
-    // 🆕 In v3, managing the mobile drawer/menu state using a basic React state is recommended over useDisclosure
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleMenu = () => setIsOpen(!isOpen);
-
-    // Consolidated navigation links array
-    const navLinks = [
-        { label: 'Home', path: '/' },
-        { label: 'Products', path: '/products' },
-        { label: 'About', path: '/about' },
-    ];
+export default function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const navigate = useNavigate();
 
     return (
-        <Box 
-            bg="white" 
-            px={{ base: "4", md: "6" }} // 🆕 Slightly reduced mobile padding to 4 to prevent icons from touching the viewport edges
-            boxShadow="sm" 
-            position="sticky" 
-            top="0" 
-            zIndex="1000" 
-            borderBottom="1px solid" 
-            borderColor="gray.100"
-        >
-            {/* 🆕 Explicitly set w="100%" alongside h="16" to ensure contents stay perfectly contained within the viewport */}
-            <Flex h="16" w="100%" alignItems="center" justifyContent="space-between">
+        <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-divider">
+            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 
-                {/* 📱 Modern toggle button for mobile screens */}
-                <Box 
-                    display={{ base: 'block', md: 'none' }} 
-                    onClick={toggleMenu} 
-                    fontSize="2xl" 
-                    cursor="pointer"
-                    color="gray.700"
-                    mr="2" // 🆕 Added a subtle right margin for structural breathing room on smaller viewports
-                >
-                    {isOpen ? <FiX /> : <FiMenu />}
-                </Box>
-                
-                {/* 🏷️ Brand Logo and Desktop Menu */}
-                <HStack spaceX={{ base: "2", md: "8" }} alignItems="center"> {/* 🆕 Optimized spacing for narrow mobile displays */}
-                    <Box 
-                        as={RouterLink} 
-                        to="/" 
-                        fontWeight="extrabold" 
-                        fontSize={{ base: "lg", md: "xl" }} // 🆕 Scaled down logo font size slightly (lg) on mobile viewports
-                        color="blue.600"
-                        letterSpacing="tight"
-                        _hover={{ textDecoration: 'none' }}
+                {/* Logo */}
+                <Link to="/" className="font-bold text-xl text-primary">
+                    MyApp
+                </Link>
+
+                {/* Desktop Menu */}
+                <nav className="hidden sm:flex items-center gap-6">
+                    <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
+                    <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
+                    <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact Us</Link>
+                </nav>
+
+                {/* Right Actions / Profile */}
+                <div className="flex items-center gap-4">
+                    {!isLoggedIn ? (
+                        <Button 
+                            as={Link} 
+                            color="primary" 
+                            to="/login" 
+                            variant="flat"
+                            size="sm"
+                            onPress={() => setIsLoggedIn(true)}
+                        >
+                            Login
+                        </Button>
+                    ) : (
+                        <Dropdown placement="bottom-end">
+                            <DropdownTrigger>
+                                <Avatar
+                                    isBordered
+                                    as="button"
+                                    className="transition-transform cursor-pointer"
+                                    color="primary"
+                                    name="User"
+                                    size="sm"
+                                    src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                                />
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Profile Actions" variant="flat">
+                                <DropdownItem key="profile" className="h-14 gap-2">
+                                    <p className="font-semibold">Signed in as</p>
+                                    <p className="font-semibold text-primary">user@example.com</p>
+                                </DropdownItem>
+                                <DropdownItem key="my_profile" onPress={() => navigate('/profile')}>
+                                    My Profile
+                                </DropdownItem>
+                                <DropdownItem key="change_password" onPress={() => navigate('/change-password')}>
+                                    Password Change
+                                </DropdownItem>
+                                <DropdownItem key="logout" color="danger" onPress={() => setIsLoggedIn(false)}>
+                                    Log Out
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    )}
+
+                    {/* Mobile Menu Button */}
+                    <button 
+                        onClick={() => setIsMenuOpen(!isMenuOpen)} 
+                        className="sm:hidden p-2 text-foreground focus:outline-none"
                     >
-                        CheSubhro
-                    </Box>
+                        ☰
+                    </button>
+                </div>
+            </div>
 
-                    {/* 💻 Desktop Navigation */}
-                    <HStack as="nav" spaceX="6" display={{ base: 'none', md: 'flex' }}>
-                        {navLinks.map((link) => (
-                            <Link 
-                                key={link.label}
-                                as={RouterLink} 
-                                to={link.path}
-                                fontWeight="medium"
-                                color="gray.600"
-                                fontSize="sm"
-                                transition="all 0.2s"
-                                _hover={{ color: "blue.600", textDecoration: "none" }}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                    </HStack>
-                </HStack>
-
-                {/* 🔑 Right Side Action Button */}
-                {/* 🆕 Kept at minW="fit-content" inside the flex container to guarantee the action element never squishes or breaks onto new lines */}
-                <Flex alignItems="center" minW="fit-content"> 
-                    <Button 
-                        as={RouterLink}
-                        to="/login"
-                        bg="blue.600" 
-                        color="white"
-                        size="sm" 
-                        borderRadius="lg"
-                        px={{ base: "3", md: "5" }} // 🆕 Compressed horizontal padding to 3 on mobile for a tighter, cleaner button footprint
-                        fontWeight="semibold"
-                        _hover={{ bg: "blue.700" }}
-                        boxShadow="0 4px 12px rgba(37, 99, 235, 0.15)"
-                    >
-                        Login
-                    </Button>
-                </Flex>
-            </Flex>
-
-            {/* Mobile Menu Content */}
-            {isOpen && (
-                <Box pb="4" display={{ md: 'none' }}>
-                    <Stack as="nav" spaceY="3" mt="2">
-                        {navLinks.map((link) => (
-                            <Link 
-                                key={link.label}
-                                as={RouterLink} 
-                                to={link.path}
-                                onClick={toggleMenu}
-                                fontWeight="medium"
-                                color="gray.700"
-                                py="2"
-                                px="3"
-                                borderRadius="md"
-                                _hover={{ bg: "blue.50", color: "blue.600", textDecoration: "none" }}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                    </Stack>
-                </Box>
+            {/* Mobile Dropdown Menu */}
+            {isMenuOpen && (
+                <div className="sm:hidden border-t border-divider bg-background px-6 py-4 flex flex-col gap-4">
+                    <Link to="/" onClick={() => setIsMenuOpen(false)} className="text-foreground hover:text-primary">Home</Link>
+                    <Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-foreground hover:text-primary">About</Link>
+                    <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="text-foreground hover:text-primary">Contact Us</Link>
+                </div>
             )}
-        </Box>
+        </header>
     );
-};
-
-export default Navbar;
+}

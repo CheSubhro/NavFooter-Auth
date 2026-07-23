@@ -1,17 +1,17 @@
 
 import React from 'react';
-import { Flex, Box } from '@chakra-ui/react';
-import { Navbar, Footer } from '../components/layout/index'; 
+import { Outlet } from 'react-router-dom';
+import { Navbar, Footer } from '../components/layout/index';
 
-const MainLayout = ({ children }) => {
+const MainLayout = () => {
     return (
-        <Flex direction="column" minH="100vh">
+        <div className="flex flex-col min-h-screen bg-background text-foreground">
             <Navbar />
-                <Box as="main" flex="1" p={4}>
-                    {children}
-                </Box>
-            <Footer />
-        </Flex>
+            <main className="flex-1 p-6">
+                <Outlet />
+            </main>
+            <Footer /> 
+        </div>
     );
 };
 
