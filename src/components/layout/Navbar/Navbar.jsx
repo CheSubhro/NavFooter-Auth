@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-    Button, 
     Dropdown, 
     DropdownTrigger, 
     DropdownMenu, 
     DropdownItem, 
     Avatar 
 } from "@heroui/react";
+import Button from '../../common/Button/Button'; 
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 
                 {/* Logo */}
-                <Link to="/" className="font-extrabold text-xl text-indigo-400 tracking-wide">
+                <Link to="/" className="font-extrabold text-xl text-emerald-400 tracking-wide">
                     MyApp
                 </Link>
 
@@ -36,7 +36,7 @@ export default function Navbar() {
                         <Link 
                             key={link.to} 
                             to={link.to} 
-                            className="text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors"
+                            className="text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors"
                         >
                             {link.label}
                         </Link>
@@ -49,9 +49,9 @@ export default function Navbar() {
                         <Button 
                             as={Link} 
                             to="/login" 
-                            size="sm"
+                            size="md" 
                             onPress={() => setIsLoggedIn(true)}
-                            className="bg-indigo-600 text-white font-medium px-5 rounded-lg border border-indigo-400/40 shadow-md shadow-indigo-950/50 hover:bg-indigo-500 hover:border-indigo-300 active:scale-95 transition-all duration-200"
+                            className="px-6 py-2 text-base font-semibold" 
                         >
                             Login
                         </Button>
@@ -61,7 +61,7 @@ export default function Navbar() {
                                 <Avatar
                                     isBordered
                                     as="button"
-                                    className="transition-transform cursor-pointer ring-2 ring-indigo-500/50"
+                                    className="transition-transform cursor-pointer ring-2 ring-emerald-500/50"
                                     name="User"
                                     size="sm"
                                     src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
@@ -70,7 +70,7 @@ export default function Navbar() {
                             <DropdownMenu aria-label="Profile Actions" variant="flat">
                                 <DropdownItem key="profile" className="h-14 gap-2">
                                     <p className="font-semibold text-slate-700">Signed in as</p>
-                                    <p className="font-semibold text-indigo-600">user@example.com</p>
+                                    <p className="font-semibold text-emerald-600">user@example.com</p>
                                 </DropdownItem>
                                 <DropdownItem key="my_profile" onPress={() => navigate('/profile')}>
                                     My Profile
@@ -110,7 +110,7 @@ export default function Navbar() {
                             key={link.to} 
                             to={link.to} 
                             onClick={() => setIsMenuOpen(false)} 
-                            className="text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors py-1"
+                            className="text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors py-1"
                         >
                             {link.label}
                         </Link>

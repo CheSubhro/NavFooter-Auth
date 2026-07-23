@@ -75,9 +75,7 @@ export default function Footer() {
                                 placeholder="Enter your email" 
                                 size="sm"
                             />
-                            {/* Improved Button with Gradient & Shadow */}
                             <Button 
-                                className="bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-semibold shadow-lg shadow-teal-900/30 hover:from-teal-600 hover:to-emerald-700 active:scale-95 transition-all duration-200" 
                                 size="sm" 
                                 type="submit"
                             >
