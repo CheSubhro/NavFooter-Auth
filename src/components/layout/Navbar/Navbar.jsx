@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
     Dropdown, 
@@ -13,9 +13,12 @@ import Button from '../../common/Button/Button';
 export default function Navbar() {
     
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // ড্রপডাউনের জন্য আলাদা স্টেট
     const navigate = useNavigate();
+
+    // Ref for the entire navbar component
+    const navbarRef = useRef(null);
 
     const navLinks = [
         { to: '/', label: 'Home' },
@@ -25,11 +28,27 @@ export default function Navbar() {
 
     const handleLogout = () => {
         setIsLoggedIn(false);
+        setIsDropdownOpen(false);
         navigate('/');
     };
 
+    // বাইরে ক্লিক করলে মোবাইল মেনু এবং ড্রপডাউন দুটোই বন্ধ হয়ে যাবে
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+                setIsMenuOpen(false);
+                setIsDropdownOpen(false); // বাইরে ক্লিক করলে ড্রপডাউন বন্ধ হবে
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <header className="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/80 shadow-lg shadow-slate-950/20 transition-colors">
+        <header ref={navbarRef} className="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/80 shadow-lg shadow-slate-950/20 transition-colors">
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                 
                 {/* Logo with Modern Glow Effect */}
@@ -78,7 +97,11 @@ export default function Navbar() {
                             </Button>
                         </div>
                     ) : (
-                        <Dropdown placement="bottom-end">
+                        <Dropdown 
+                            placement="bottom-end" 
+                            isOpen={isDropdownOpen} 
+                            onOpenChange={(open) => setIsDropdownOpen(open)}
+                        >
                             <DropdownTrigger>
                                 <div className="flex items-center gap-2.5 p-1 rounded-full hover:bg-slate-800/60 transition-colors cursor-pointer group">
                                     <Avatar
@@ -105,7 +128,7 @@ export default function Navbar() {
                                 
                                 <DropdownItem 
                                     key="my_profile" 
-                                    onPress={() => navigate('/profile')}
+                                    onPress={() => { setIsDropdownOpen(false); navigate('/profile'); }}
                                     className="rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors py-2.5 font-medium"
                                 >
                                     <div className="flex items-center gap-2.5">
@@ -116,7 +139,7 @@ export default function Navbar() {
 
                                 <DropdownItem 
                                     key="change_password" 
-                                    onPress={() => navigate('/changepassword')}
+                                    onPress={() => { setIsDropdownOpen(false); navigate('/changepassword'); }}
                                     className="rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors py-2.5 font-medium"
                                 >
                                     <div className="flex items-center gap-2.5">
