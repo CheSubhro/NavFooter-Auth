@@ -11,10 +11,9 @@ import {
 import Button from '../../common/Button/Button'; 
 
 export default function Navbar() {
+    
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
-    // Prothom obosthay false thakbe, login page theke successful submit hole token ba auth context theke value ashbe. 
-    // Ekhane amra session storage ba local state use korte pari mock-up er jonno.
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
     const navigate = useNavigate();
 
