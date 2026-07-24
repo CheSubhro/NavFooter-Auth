@@ -22,7 +22,7 @@ export default function ComponentShowcase() {
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('');
 
     const selectOptions = [
         { value: '1', label: 'Option One' },
