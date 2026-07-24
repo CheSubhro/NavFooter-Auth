@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Register from '../pages/Register'
 import Login from '../pages/Login'
+import Forgotpassword from '../pages/Forgotpassword'
 import Home from '../pages/Home'
 import About from '../pages/About'
 import Contact from '../pages/Contact'
@@ -24,8 +25,9 @@ export default function AppRoutes() {
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/register" element={<Register />} />
-                
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<Forgotpassword />} />
+                
             </Route>
         </Routes>
     );
