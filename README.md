@@ -31,3 +31,5 @@ Run the development server:
 
 Bash
 npm run dev
+
+👨‍💻 Developed by CheSubhro Built with 💜 for a seamless experience.
