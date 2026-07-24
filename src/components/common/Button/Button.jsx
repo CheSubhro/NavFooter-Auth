@@ -15,7 +15,6 @@ export default function Button({
     disabled = false,
     ...props 
 }) {
-    // Dynamic color styles including emerald/teal primary gradient support
     const colorVariants = {
         primary: "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-emerald-500/30 shadow-lg shadow-emerald-900/20",
         secondary: "bg-slate-800 hover:bg-slate-700 text-slate-100 border-slate-700/80 shadow-slate-950/50",

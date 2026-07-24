@@ -14,7 +14,7 @@ export default function Navbar() {
     
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // ড্রপডাউনের জন্য আলাদা স্টেট
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
     const navigate = useNavigate();
 
     // Ref for the entire navbar component
@@ -23,7 +23,8 @@ export default function Navbar() {
     const navLinks = [
         { to: '/', label: 'Home' },
         { to: '/about', label: 'About' },
-        { to: '/contact', label: 'Contact Us' }
+        { to: '/contact', label: 'Contact Us' },
+        { to: '/componentshowcase', label: 'Componentshowcase' },
     ];
 
     const handleLogout = () => {
@@ -32,12 +33,11 @@ export default function Navbar() {
         navigate('/');
     };
 
-    // বাইরে ক্লিক করলে মোবাইল মেনু এবং ড্রপডাউন দুটোই বন্ধ হয়ে যাবে
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (navbarRef.current && !navbarRef.current.contains(event.target)) {
                 setIsMenuOpen(false);
-                setIsDropdownOpen(false); // বাইরে ক্লিক করলে ড্রপডাউন বন্ধ হবে
+                setIsDropdownOpen(false); 
             }
         };
 

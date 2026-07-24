@@ -14,6 +14,7 @@ import Services from '../pages/Services'
 import Faq from '../pages/Faq'
 import Privacy from '../pages/Privacy'
 import Terms from '../pages/Terms'
+import ComponentShowcase from '../pages/ComponentShowcase'
 
 export default function AppRoutes() {
     return (
@@ -31,6 +32,8 @@ export default function AppRoutes() {
                 <Route path="/changepassword" element={<Changepassword />} />
                 <Route path="/forgot-password" element={<Forgotpassword />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/componentshowcase" element={<ComponentShowcase />} />
+                
                 
                 
             </Route>
