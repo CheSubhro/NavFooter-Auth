@@ -8,6 +8,7 @@ import Contact from '../pages/Contact'
 import Services from '../pages/Services'
 import Faq from '../pages/Faq'
 import Privacy from '../pages/Privacy'
+import Terms from '../pages/Terms'
 
 export default function AppRoutes() {
     return (
@@ -19,8 +20,7 @@ export default function AppRoutes() {
                 <Route path="/services" element={<Services />} />
                 <Route path="/faq" element={<Faq />} />
                 <Route path="/privacy" element={<Privacy />} />
-                terms
-                
+                <Route path="/terms" element={<Terms />} />
                 
                 {/* <Route path="/login" element={<Login />} /> */}
             </Route>
