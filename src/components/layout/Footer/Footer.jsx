@@ -78,6 +78,7 @@ export default function Footer() {
                             <Button 
                                 size="sm" 
                                 type="submit"
+                                color="primary"
                             >
                                 Subscribe
                             </Button>

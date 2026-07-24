@@ -11,13 +11,13 @@ export default function Button({
     onClick, 
     className = '', 
     variant = 'solid', 
-    color = 'secondary', 
+    color = 'primary',
     disabled = false,
     ...props 
 }) {
-    // Dynamic color styles
+    // Dynamic color styles including emerald/teal primary gradient support
     const colorVariants = {
-        primary: "bg-indigo-600 hover:bg-indigo-500 text-white border-indigo-500/30 shadow-indigo-950/40",
+        primary: "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-emerald-500/30 shadow-lg shadow-emerald-900/20",
         secondary: "bg-slate-800 hover:bg-slate-700 text-slate-100 border-slate-700/80 shadow-slate-950/50",
         danger: "bg-rose-600 hover:bg-rose-500 text-white border-rose-500/30 shadow-rose-950/40"
     };
@@ -25,7 +25,7 @@ export default function Button({
     const selectedColorStyle = colorVariants[color] || colorVariants.secondary;
 
     const combinedClassName = `
-        font-medium rounded-xl transition-all duration-200 cursor-pointer border shadow-md
+        font-semibold rounded-xl transition-all duration-200 cursor-pointer border shadow-md
         active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100
         ${selectedColorStyle}
         ${className}
