@@ -18,11 +18,11 @@ Installation
 Clone the repository:
 
 Bash
-git clone <repository-url>
+git clone (https://github.com/CheSubhro/NavFooter-Auth.git)
 Navigate into the project directory:
 
 Bash
-cd <project-folder>
+cd NavFooter-Auth
 Install dependencies:
 
 Bash
