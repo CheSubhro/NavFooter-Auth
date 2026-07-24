@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Register from '../pages/Register'
 import Login from '../pages/Login'
+import Profile from '../pages/Profile'
 import Forgotpassword from '../pages/Forgotpassword'
 import Home from '../pages/Home'
 import About from '../pages/About'
@@ -27,6 +28,8 @@ export default function AppRoutes() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<Forgotpassword />} />
+                <Route path="/profile" element={<Profile />} />
+                
                 
             </Route>
         </Routes>
