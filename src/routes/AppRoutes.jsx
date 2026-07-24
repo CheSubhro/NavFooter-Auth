@@ -7,6 +7,7 @@ import About from '../pages/About'
 import Contact from '../pages/Contact'
 import Services from '../pages/Services'
 import Faq from '../pages/Faq'
+import Privacy from '../pages/Privacy'
 
 export default function AppRoutes() {
     return (
@@ -17,6 +18,9 @@ export default function AppRoutes() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/faq" element={<Faq />} />
+                <Route path="/privacy" element={<Privacy />} />
+                terms
+                
                 
                 {/* <Route path="/login" element={<Login />} /> */}
             </Route>
