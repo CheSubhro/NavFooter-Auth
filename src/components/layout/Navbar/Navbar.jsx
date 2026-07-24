@@ -12,6 +12,9 @@ import Button from '../../common/Button/Button';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
+    // Prothom obosthay false thakbe, login page theke successful submit hole token ba auth context theke value ashbe. 
+    // Ekhane amra session storage ba local state use korte pari mock-up er jonno.
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
     const navigate = useNavigate();
 
@@ -20,6 +23,11 @@ export default function Navbar() {
         { to: '/about', label: 'About' },
         { to: '/contact', label: 'Contact Us' }
     ];
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        navigate('/');
+    };
 
     return (
         <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 transition-colors">
@@ -50,7 +58,6 @@ export default function Navbar() {
                             as={Link} 
                             to="/login" 
                             size="md" 
-                            onPress={() => setIsLoggedIn(true)}
                             className="px-6 py-2 text-base font-semibold" 
                         >
                             Login
@@ -77,7 +84,7 @@ export default function Navbar() {
                                 <DropdownItem key="change_password" onPress={() => navigate('/change-password')}>
                                     Password Change
                                 </DropdownItem>
-                                <DropdownItem key="logout" className="text-danger" color="danger" onPress={() => setIsLoggedIn(false)}>
+                                <DropdownItem key="logout" className="text-danger" color="danger" onPress={handleLogout}>
                                     Log Out
                                 </DropdownItem>
                             </DropdownMenu>
@@ -87,7 +94,7 @@ export default function Navbar() {
                     {/* Mobile Menu Button with smooth icon transition */}
                     <button 
                         onClick={() => setIsMenuOpen(!isMenuOpen)} 
-                        aria-label="Toggle Menu"
+                        aria-label="Navbar Toggle Menu"
                         className="sm:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 focus:outline-none transition-colors"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
