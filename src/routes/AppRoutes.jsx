@@ -2,6 +2,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import Register from '../pages/Register'
 import Login from '../pages/Login'
 import Home from '../pages/Home'
 import About from '../pages/About'
@@ -22,6 +23,7 @@ export default function AppRoutes() {
                 <Route path="/faq" element={<Faq />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/register" element={<Register />} />
                 
                 <Route path="/login" element={<Login />} />
             </Route>
