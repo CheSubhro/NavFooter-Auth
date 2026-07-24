@@ -59,7 +59,6 @@ export default function Navbar() {
                         <Dropdown placement="bottom-end">
                             <DropdownTrigger>
                                 <Avatar
-                                    isBordered
                                     as="button"
                                     className="transition-transform cursor-pointer ring-2 ring-emerald-500/50"
                                     name="User"

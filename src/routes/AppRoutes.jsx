@@ -2,6 +2,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import Login from '../pages/Login'
 import Home from '../pages/Home'
 import About from '../pages/About'
 import Contact from '../pages/Contact'
@@ -22,7 +23,7 @@ export default function AppRoutes() {
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 
-                {/* <Route path="/login" element={<Login />} /> */}
+                <Route path="/login" element={<Login />} />
             </Route>
         </Routes>
     );
