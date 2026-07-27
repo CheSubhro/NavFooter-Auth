@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import { Button, Input, Spinner } from '../../components/common';
 import { Link, useNavigate } from 'react-router-dom';
+import { validateLogin } from '../../utils/validation';
 
 export default function LoginForm() {
-    
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -17,14 +18,14 @@ export default function LoginForm() {
         e.preventDefault();
         setError('');
 
-        if (!email || !password) {
-            setError('Please fill in all required fields.');
+        const validation = validateLogin(email, password);
+        if (!validation.isValid) {
+            setError(validation.error);
             return;
         }
-
+        
         setLoading(true);
         
-        // Simulate authentication delay
         setTimeout(() => {
             setLoading(false);
             setSuccess(true);
