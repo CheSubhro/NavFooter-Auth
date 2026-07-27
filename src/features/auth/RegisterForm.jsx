@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { validateRegister } from '../../utils/validation';
 
 export default function RegisterForm() {
-    s
+    
     const [fullName, setFullName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
