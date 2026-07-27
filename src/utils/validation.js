@@ -1,13 +1,7 @@
 
-export const validateLogin = (email, password) => {
-
-    if (!email || !password) {
+export const validateLogin = (identifier, password) => {
+    if (!identifier || !password) {
         return { isValid: false, error: 'Please fill in all required fields.' };
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return { isValid: false, error: 'Please enter a valid email address.' };
     }
 
     if (password.length < 6) {
