@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../../common/Button/Button'; 
-import Input from '../../common/Input/Input';
+import NewsletterForm from '../../../features/newsletter/NewsletterForm';
 
 export default function Footer() {
+
     const currentYear = new Date().getFullYear();
 
     return (
@@ -64,26 +64,7 @@ export default function Footer() {
                     </div>
 
                     {/* Column 4: Newsletter Subscription (Span 4) */}
-                    <div className="space-y-3 md:col-span-4 bg-slate-800/40 p-5 rounded-xl border border-slate-800">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-100">Stay Updated</h3>
-                        <p className="text-sm text-slate-400">
-                            Subscribe to our newsletter for the latest updates and announcements.
-                        </p>
-                        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-2 pt-1">
-                            <Input 
-                                type="email" 
-                                placeholder="Enter your email" 
-                                size="sm"
-                            />
-                            <Button 
-                                size="sm" 
-                                type="submit"
-                                color="primary"
-                            >
-                                Subscribe
-                            </Button>
-                        </form>
-                    </div>
+                    <NewsletterForm />
 
                 </div>
 
