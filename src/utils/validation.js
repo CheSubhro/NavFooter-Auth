@@ -30,3 +30,23 @@ export const validateRegister = (fullName, username, email, password, confirmPas
 
     return { isValid: true, error: '' };
 };
+
+export const validateContact = (name, email, department, message) => {
+    if (!name || !name.trim()) {
+        return { isValid: false, error: 'Please enter your name.' };
+    }
+    if (!email || !email.trim()) {
+        return { isValid: false, error: 'Please enter your email address.' };
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return { isValid: false, error: 'Please enter a valid email address.' };
+    }
+    if (!department) {
+        return { isValid: false, error: 'Please select a department.' };
+    }
+    if (!message || !message.trim()) {
+        return { isValid: false, error: 'Please enter your message.' };
+    }
+    return { isValid: true, error: '' };
+};
